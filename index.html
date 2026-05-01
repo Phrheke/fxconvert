@@ -72,14 +72,8 @@
             <a class="hover:text-on-surface" href="#faq">FAQ</a>
           </nav>
 
-          <!-- API status only -->
-          <div class="flex items-center">
-            <span
-              class="inline-flex px-3 py-1.5 rounded-full bg-surface-container border border-outline-variant/60 text-xs text-on-surface-variant"
-              id="apiStatus"
-              aria-live="polite"
-            >API: idle</span>
-          </div>
+          <!-- API status (hidden — used internally by JS only) -->
+          <span id="apiStatus" class="sr-only" aria-live="polite">API: idle</span>
         </div>
       </div>
     </header>
