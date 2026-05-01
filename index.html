@@ -53,8 +53,9 @@
     <header class="sticky top-0 z-40 border-b border-outline-variant/60 bg-white/70 backdrop-blur-xl">
       <div class="max-w-7xl mx-auto px-6">
         <div class="h-16 flex items-center justify-between gap-4">
+          <!-- Logo -->
           <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-primary text-on-primary grid place-items-center font-black">
+            <div class="w-9 h-9 rounded-xl bg-primary text-on-primary grid place-items-center font-black text-sm">
               FX
             </div>
             <div class="leading-tight">
@@ -63,6 +64,7 @@
             </div>
           </div>
 
+          <!-- Nav links (desktop) -->
           <nav class="hidden md:flex items-center gap-6 text-sm text-on-surface-variant">
             <a class="hover:text-on-surface" href="#converter">Converter</a>
             <a class="hover:text-on-surface" href="#markets">African Markets</a>
@@ -70,12 +72,13 @@
             <a class="hover:text-on-surface" href="#faq">FAQ</a>
           </nav>
 
-          <div class="flex items-center gap-3">
-            <span class="hidden sm:inline-flex px-3 py-1.5 rounded-full bg-surface-container border border-outline-variant/60 text-xs text-on-surface-variant" id="apiStatus" aria-live="polite">API: idle</span>
-            <a class="hidden sm:inline-flex text-sm text-on-surface-variant hover:text-on-surface" href="#login">Login</a>
-            <a class="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-primary text-on-primary font-bold text-sm shadow-card hover:bg-primary-container transition-colors" href="#converter">
-              Open Account
-            </a>
+          <!-- API status only -->
+          <div class="flex items-center">
+            <span
+              class="inline-flex px-3 py-1.5 rounded-full bg-surface-container border border-outline-variant/60 text-xs text-on-surface-variant"
+              id="apiStatus"
+              aria-live="polite"
+            >API: idle</span>
           </div>
         </div>
       </div>
@@ -126,7 +129,7 @@
                     id="fromCurrency"
                     class="w-full rounded-xl border-outline-variant/80 bg-surface-container-low focus:border-primary focus:ring-primary/20 focus-ring"
                     list="currencyList"
-                    placeholder="Type currency (e.g., USD)"
+                    placeholder="e.g. USD"
                   />
                 </label>
 
@@ -146,7 +149,7 @@
                     id="toCurrency"
                     class="w-full rounded-xl border-outline-variant/80 bg-surface-container-low focus:border-primary focus:ring-primary/20 focus-ring"
                     list="currencyList"
-                    placeholder="Type currency (e.g., NGN)"
+                    placeholder="e.g. NGN"
                   />
                 </label>
               </div>
@@ -165,7 +168,7 @@
                 Convert
               </button>
               <p class="text-[11px] text-on-surface-variant">
-                Reference rates from Frankfurter/ECB. Providers may add spreads and fees.
+                Reference rates via AlphaVantage / UniRate. Providers may add spreads and fees.
               </p>
             </form>
           </div>
@@ -198,65 +201,68 @@
             <a class="text-sm text-primary font-bold hover:underline" href="#charts">View charts →</a>
           </div>
 
+          <!-- Scrollable wrapper for mobile -->
           <div class="bg-white rounded-2xl border border-outline-variant/70 shadow-card overflow-hidden hover-lift animate-in animate-in--delay-2">
-            <table class="w-full text-sm">
-              <thead class="bg-surface-container">
-                <tr class="text-left text-on-surface-variant">
-                  <th class="px-6 py-4 text-xs font-bold tracking-widest uppercase">Currency Pair</th>
-                  <th class="px-6 py-4 text-xs font-bold tracking-widest uppercase">Current Rate</th>
-                  <th class="px-6 py-4 text-xs font-bold tracking-widest uppercase">24H Change</th>
-                  <th class="px-6 py-4 text-xs font-bold tracking-widest uppercase">Local Status</th>
-                  <th class="px-6 py-4 text-xs font-bold tracking-widest uppercase text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody id="marketsBody" class="divide-y divide-outline-variant/60">
-                <tr data-pair="NGN/USD">
-                  <td class="px-6 py-4 font-bold">NGN / USD</td>
-                  <td class="px-6 py-4 tabular-nums" data-field="rate">—</td>
-                  <td class="px-6 py-4" data-field="change">
-                    <span class="px-2 py-1 rounded-full text-xs bg-surface-container text-on-surface-variant border border-outline-variant/60">—</span>
-                  </td>
-                  <td class="px-6 py-4" data-field="status">
-                    <span class="inline-flex items-center gap-2 text-xs text-on-surface-variant">
-                      <span class="w-2 h-2 rounded-full bg-amber-500"></span> High Volatility
-                    </span>
-                  </td>
-                  <td class="px-6 py-4 text-right">
-                    <button class="text-primary font-bold hover:underline" type="button" data-action="chart">Chart</button>
-                  </td>
-                </tr>
-                <tr data-pair="ZAR/USD">
-                  <td class="px-6 py-4 font-bold">ZAR / USD</td>
-                  <td class="px-6 py-4 tabular-nums" data-field="rate">—</td>
-                  <td class="px-6 py-4" data-field="change">
-                    <span class="px-2 py-1 rounded-full text-xs bg-surface-container text-on-surface-variant border border-outline-variant/60">—</span>
-                  </td>
-                  <td class="px-6 py-4" data-field="status">
-                    <span class="inline-flex items-center gap-2 text-xs text-on-surface-variant">
-                      <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Stable
-                    </span>
-                  </td>
-                  <td class="px-6 py-4 text-right">
-                    <button class="text-primary font-bold hover:underline" type="button" data-action="chart">Chart</button>
-                  </td>
-                </tr>
-                <tr data-pair="KES/GBP">
-                  <td class="px-6 py-4 font-bold">KES / GBP</td>
-                  <td class="px-6 py-4 tabular-nums" data-field="rate">—</td>
-                  <td class="px-6 py-4" data-field="change">
-                    <span class="px-2 py-1 rounded-full text-xs bg-surface-container text-on-surface-variant border border-outline-variant/60">—</span>
-                  </td>
-                  <td class="px-6 py-4" data-field="status">
-                    <span class="inline-flex items-center gap-2 text-xs text-on-surface-variant">
-                      <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Upward Trend
-                    </span>
-                  </td>
-                  <td class="px-6 py-4 text-right">
-                    <button class="text-primary font-bold hover:underline" type="button" data-action="chart">Chart</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="overflow-x-auto -webkit-overflow-scrolling-touch">
+              <table class="w-full text-sm min-w-[600px]">
+                <thead class="bg-surface-container">
+                  <tr class="text-left text-on-surface-variant">
+                    <th class="px-6 py-4 text-xs font-bold tracking-widest uppercase whitespace-nowrap">Currency Pair</th>
+                    <th class="px-6 py-4 text-xs font-bold tracking-widest uppercase whitespace-nowrap">Current Rate</th>
+                    <th class="px-6 py-4 text-xs font-bold tracking-widest uppercase whitespace-nowrap">24H Change</th>
+                    <th class="px-6 py-4 text-xs font-bold tracking-widest uppercase whitespace-nowrap">Local Status</th>
+                    <th class="px-6 py-4 text-xs font-bold tracking-widest uppercase text-right whitespace-nowrap">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="marketsBody" class="divide-y divide-outline-variant/60">
+                  <tr data-pair="NGN/USD">
+                    <td class="px-6 py-4 font-bold whitespace-nowrap">NGN / USD</td>
+                    <td class="px-6 py-4 tabular-nums whitespace-nowrap" data-field="rate">—</td>
+                    <td class="px-6 py-4 whitespace-nowrap" data-field="change">
+                      <span class="px-2 py-1 rounded-full text-xs bg-surface-container text-on-surface-variant border border-outline-variant/60">—</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap" data-field="status">
+                      <span class="inline-flex items-center gap-2 text-xs text-on-surface-variant">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span> High Volatility
+                      </span>
+                    </td>
+                    <td class="px-6 py-4 text-right whitespace-nowrap">
+                      <button class="text-primary font-bold hover:underline" type="button" data-action="chart">Chart</button>
+                    </td>
+                  </tr>
+                  <tr data-pair="ZAR/USD">
+                    <td class="px-6 py-4 font-bold whitespace-nowrap">ZAR / USD</td>
+                    <td class="px-6 py-4 tabular-nums whitespace-nowrap" data-field="rate">—</td>
+                    <td class="px-6 py-4 whitespace-nowrap" data-field="change">
+                      <span class="px-2 py-1 rounded-full text-xs bg-surface-container text-on-surface-variant border border-outline-variant/60">—</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap" data-field="status">
+                      <span class="inline-flex items-center gap-2 text-xs text-on-surface-variant">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Stable
+                      </span>
+                    </td>
+                    <td class="px-6 py-4 text-right whitespace-nowrap">
+                      <button class="text-primary font-bold hover:underline" type="button" data-action="chart">Chart</button>
+                    </td>
+                  </tr>
+                  <tr data-pair="KES/GBP">
+                    <td class="px-6 py-4 font-bold whitespace-nowrap">KES / GBP</td>
+                    <td class="px-6 py-4 tabular-nums whitespace-nowrap" data-field="rate">—</td>
+                    <td class="px-6 py-4 whitespace-nowrap" data-field="change">
+                      <span class="px-2 py-1 rounded-full text-xs bg-surface-container text-on-surface-variant border border-outline-variant/60">—</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap" data-field="status">
+                      <span class="inline-flex items-center gap-2 text-xs text-on-surface-variant">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Upward Trend
+                      </span>
+                    </td>
+                    <td class="px-6 py-4 text-right whitespace-nowrap">
+                      <button class="text-primary font-bold hover:underline" type="button" data-action="chart">Chart</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
@@ -354,7 +360,7 @@
                 How is the USD/NGN I&amp;E rate determined?
               </summary>
               <div class="px-6 pb-5 text-sm text-on-surface-variant leading-relaxed">
-                The Investors and Exporters (I&amp;E) window rate is determined by market forces and liquidity in Nigeriaâ€™s official NAFEM. This demo uses
+                The Investors and Exporters (I&amp;E) window rate is determined by market forces and liquidity in Nigeria's official NAFEM. This demo uses
                 free reference rates for transparency and learning.
               </div>
             </details>
@@ -364,7 +370,7 @@
                 Can I use FXGlobal for business imports/exports?
               </summary>
               <div class="px-6 pb-5 text-sm text-on-surface-variant leading-relaxed">
-                You can use the converter and charts to understand trends and plan. For real settlement, youâ€™ll need a licensed provider that supports your route and compliance requirements.
+                You can use the converter and charts to understand trends and plan. For real settlement, you'll need a licensed provider that supports your route and compliance requirements.
               </div>
             </details>
 
@@ -373,7 +379,7 @@
                 What are the CBN limits on FX transfers?
               </summary>
               <div class="px-6 pb-5 text-sm text-on-surface-variant leading-relaxed">
-                Limits vary by product, purpose, and documentation. Always confirm the current circulars and your providerâ€™s policies.
+                Limits vary by product, purpose, and documentation. Always confirm the current circulars and your provider's policies.
               </div>
             </details>
           </div>
@@ -395,7 +401,7 @@
           <div class="space-y-4">
             <div class="text-lg font-extrabold text-on-surface">FXGlobal Africa</div>
             <p class="text-xs leading-relaxed text-on-surface-variant">
-              Â© 2026 FXGlobal. Demo app using free reference FX rates (Frankfurter/ECB).
+              © 2026 FXGlobal. Demo app using free reference FX rates (AlphaVantage / UniRate).
             </p>
           </div>
           <div>
